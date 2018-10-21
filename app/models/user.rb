@@ -8,9 +8,9 @@ class User < ApplicationRecord
   
   has_many :microposts
   
-  has_many :follow_relations
+  has_many :follow_relations, dependent: :destroy
   has_many :followings, through: :follow_relations, source: :follow
-  has_many :followers_relations, class_name: 'FollowRelation', foreign_key: 'follow_id'
+  has_many :followers_relations, class_name: 'FollowRelation', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :followers_relations, source: :user
 
   def follow(other_user)
@@ -32,7 +32,7 @@ class User < ApplicationRecord
     Micropost.where(user_id: self.following_ids + [self.id])
   end
   
-  has_many :user_microposts
+  has_many :user_microposts, dependent: :destroy
   has_many :favoritings, through: :user_microposts, source: :micropost
   
   def favo(micropost)

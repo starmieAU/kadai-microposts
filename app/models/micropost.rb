@@ -3,7 +3,7 @@ class Micropost < ApplicationRecord
   
   validates :content, presence: true, length: { maximum: 255}
   
-  has_many :user_microposts
+  has_many :user_microposts, dependent: :destroy
   has_many :favoriters, through: :user_microposts, source: :user
 
 end
