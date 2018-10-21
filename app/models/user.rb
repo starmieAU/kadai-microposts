@@ -49,7 +49,7 @@ class User < ApplicationRecord
   end
   
   def feed_microposts
-    Micropost.where(user_id: self.following_ids + self.favoriting_ids + [self.id])
+    Micropost.where(user_id: self.following_ids + [self.id]).or(Micropost.where(id: self.favoriting_ids))
   end
   
 end
