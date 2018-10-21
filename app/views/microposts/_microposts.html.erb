@@ -11,11 +11,15 @@
         <div>
           <p><%= micropost.content %></p>
         </div>
-        <div>
+        <div class="btn-toolbar">
+          <%= render 'user_microposts/favo_botton',micropost: micropost %>
           <% if current_user == micropost.user %>
-            <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+            <%= link_to(micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-default btn-xs') do %>
+              <span class="glyphicon glyphicon-trash icon-gray"></span>
+            <% end %>
           <% end %>
         </div>
+
       </div>
     </li>
   <% end %>

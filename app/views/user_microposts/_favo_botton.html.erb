@@ -1,0 +1,21 @@
+<% if current_user.favo?(micropost) %>
+  <%= form_for(current_user.user_microposts.find_by(micropost_id: micropost.id), html: { method: :delete }) do |f| %>
+    <%= hidden_field_tag :micropost_id, micropost.id %>
+    <%#= f.submit 'UnFavo', class: 'btn btn-danger btn-xs' %>
+    
+    <%= button_tag( class: "btn btn-default btn-xs") do %>
+      <%= content_tag :span, "", class: "glyphicon glyphicon-heart icon-pink" %>
+    <% end %>
+    
+  <% end %>
+<% else %>
+  <%= form_for(current_user.user_microposts.build) do |f| %>
+    <%= hidden_field_tag :micropost_id, micropost.id %>
+    <%#= f.submit 'value', class: 'btn btn-primary btn-xs' %>
+    
+    <%= button_tag( class: "btn btn-default btn-xs") do %>
+      <%= content_tag :span, "", class: "glyphicon glyphicon-heart icon-gray" %>
+    <% end %>    
+    
+  <% end %>
+<% end %>
